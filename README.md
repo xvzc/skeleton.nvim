@@ -36,7 +36,7 @@ You can use the custom tags with `{{ key }}` syntax in your template files, and 
 -- we only need the filename because the template_path is pre-defined in the config
 ```
 
-# Configuration for fzf-lua user
+# Configuration for fzf-lua users
 Add below to your `fzf-lua` settings
 ```lua
 local skeleton = require('skeleton')
