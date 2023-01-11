@@ -3,7 +3,9 @@ local util = require('skeleton.util')
 
 local M = {}
 
-M.config = {}
+M.config = {
+  tags = {}
+}
 
 M.test = function()
   print('test okay')
