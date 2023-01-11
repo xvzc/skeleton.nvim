@@ -20,7 +20,7 @@ M.setup = function(config)
   end
 
   if not util.contains(config.tags, "author") then
-    config.tags.timestamp = util.default_author
+    config.tags.author = util.default_author
   end
 
   if not util.contains(config, "template_path") then
