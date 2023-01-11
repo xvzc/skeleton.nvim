@@ -61,6 +61,6 @@ util.nmap(
 )
 ```
 
-# Inspiration
+# Inspirations
 - [template.nvim](https://github.com/glepnir/template.nvim)
 - [fzf-lua](https://github.com/ibhagwan/fzf-lua)
