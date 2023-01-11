@@ -59,3 +59,7 @@ util.nmap(
   buf_opt
 )
 ```
+
+# Inspiration
+- [template.nvim](https://github.com/glepnir/template.nvim)
+- [fzf-lua](https://github.com/ibhagwan/fzf-lua)
