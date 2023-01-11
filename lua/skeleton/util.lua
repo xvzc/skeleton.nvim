@@ -9,7 +9,7 @@ M.default_datetime = function()
 end
 
 M.contains = function(table, key)
-  return table[key] ~= nil
+  return table ~= nil and table[key] ~= nil
 end
 
 return M
