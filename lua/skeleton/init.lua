@@ -1,5 +1,5 @@
 local core = require('skeleton.core')
-local util = require('skeleton.core')
+local util = require('skeleton.util')
 
 local M = {}
 
