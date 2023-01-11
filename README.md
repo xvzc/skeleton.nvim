@@ -37,6 +37,7 @@ You can use the custom tags with `{{ key }}` syntax in your template files, and 
 ```
 
 # Configuration for fzf-lua user
+Add below to your `fzf-lua` settings
 ```lua
 local skeleton = require('skeleton')
 util.nmap(
