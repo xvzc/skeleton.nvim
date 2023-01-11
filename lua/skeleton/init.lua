@@ -7,7 +7,7 @@ M.config = {}
 
 M.test = function()
   print('test okay')
-  print(util.get_datetime())
+  print(util.default_datetime())
 end
 
 M.setup = function(config)
