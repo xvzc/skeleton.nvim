@@ -1,4 +1,5 @@
 local core = require('skeleton.core')
+local util = require('skeleton.core')
 
 local M = {}
 
@@ -6,16 +7,16 @@ M.config = {}
 
 M.test = function()
   print('test okay')
-  print(core.get_datetime())
+  print(util.get_datetime())
 end
 
 M.setup = function(config)
-  if not core.contains(config.tags, "timestamp") then
-    config.tags.timestamp = core.default_datetime
+  if not util.contains(config.tags, "timestamp") then
+    config.tags.timestamp = util.default_datetime
   end
 
-  if not core.contains(config.tags, "author") then
-    config.tags.timestamp = core.default_author
+  if not util.contains(config.tags, "author") then
+    config.tags.timestamp = util.default_author
   end
 
   M.config = config
