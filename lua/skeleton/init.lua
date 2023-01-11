@@ -3,9 +3,7 @@ local util = require('skeleton.util')
 
 local M = {}
 
-M.config = {
-  tags = {}
-}
+M.config = {}
 
 M.test = function()
   print('test okay')
@@ -13,6 +11,10 @@ M.test = function()
 end
 
 M.setup = function(config)
+  if config.tags == nil then
+    config.tags = {}
+  end
+
   if not util.contains(config.tags, "timestamp") then
     config.tags.timestamp = util.default_datetime
   end
