@@ -23,11 +23,11 @@ M.setup = function(config)
 end
 
 M.load = function(file_path, config)
-  if config ~= nil then
-    core.load_template(file_path, config)
-  else
-    core.load_template(file_path, M.config)
+  if config == nil then
+    config = M.config
   end
+
+  core.load_template(file_path, config)
 end
 
 return M
