@@ -1,7 +1,7 @@
 local M = {}
 
 M.default_author = function()
-  local command = 'git config user.name | whoami'
+  local command = 'git config user.name || whoami'
   local handle = io.popen(command)
 
   if handle == nil then
