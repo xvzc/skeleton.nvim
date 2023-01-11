@@ -19,6 +19,10 @@ M.setup = function(config)
     config.tags.timestamp = util.default_author
   end
 
+  if not util.contains(config, "template_path") then
+    print('\"template_path\" is not set. Add it to your config.')
+  end
+
   M.config = config
 end
 
