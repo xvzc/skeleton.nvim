@@ -1,4 +1,4 @@
-local core = require('core')
+local core = require('skeleton.core')
 
 local M = {}
 
