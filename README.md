@@ -32,8 +32,7 @@ You can use the custom tags with `{{ key }}` syntax in your template files, and 
 
 # Usage
 ```
-:lua require('skeleton').load('example.txt')
--- we only need the filename because the template_path is pre-defined in the config
+:lua require('skeleton').load('/home/john/example.txt')
 ```
 
 # Configuration for fzf-lua users
