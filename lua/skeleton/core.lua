@@ -16,10 +16,10 @@ local function create_tag_values(table)
   return tag_values
 end
 
-M.load_template = function(filename, config)
+M.load_template = function(abs_path, config)
   local tag_values = create_tag_values(config.tags)
   local lines = {}
-  util.read_file(config.template_path .. "/" .. filename,
+  util.read_file(abs_path,
     vim.schedule_wrap(function(data)
       local cursor_found = false
       local cur_cursor_line = vim.api.nvim_win_get_cursor(0)[1]
@@ -45,6 +45,7 @@ M.load_template = function(filename, config)
       local cur_buf = vim.api.nvim_get_current_buf()
       local cur_line = vim.api.nvim_win_get_cursor(0)[1]
       local start = cur_line
+
       if start == 1 and #vim.api.nvim_get_current_line() == 0 then
         start = start - 1
         cur_cursor_line = cur_cursor_line - 1

@@ -23,15 +23,6 @@ M.setup = function(config)
     config.tags.author = util.default_author
   end
 
-  if not util.contains(config, "template_path") then
-    error('\"template_path\" is not set. Add it to your config.')
-  end
-
-  if not util.is_string(config.template_path) then
-    error('\"template_path\" should be a string value.')
-  end
-
-
   for k, v in pairs(config.tags) do
     if not util.is_function(v) and not util.is_string(v) then
       error('The value of \"tags.' .. k .. '\" is not a function or string.')
@@ -41,12 +32,12 @@ M.setup = function(config)
   M.config = config
 end
 
-M.load = function(filename, config)
+M.load = function(abs_path, config)
   if config == nil then
     config = M.config
   end
 
-  core.load_template(filename, config)
+  core.load_template(abs_path, config)
 end
 
 return M
