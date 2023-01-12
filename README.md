@@ -44,15 +44,19 @@ util.nmap(
   '<C-M-t>',
   function()
     fzf_lua.files({
-      file_icons = false,
+      file_icons = true,
       git_icons = false,
-      cwd = skeleton.config.template_path,
+      cwd = skeleton.get_template_path(),
       preview = "bat --style=plain {}",
       fzf_opts = { ['--preview-window'] = 'nohidden,down,50%' },
       actions = {
         ['default'] = function(selected, opts)
-          local filename = selected[1]
-          skeleton.load(filename)
+          local entry = fzf_lua.path.entry_to_file(selected[1])
+          local abs_path = entry.path
+          if not fzf_lua.path.starts_with_separator(abs_path) then
+            abs_path = fzf_lua.path.join({ opts.cwd or vim.loop.cwd(), abs_path })
+          end
+          skeleton.load(abs_path)
         end,
       }
     })
