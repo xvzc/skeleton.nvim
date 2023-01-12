@@ -9,21 +9,26 @@ Load your templates with custom defined variables or functions!
   use {
     'xvzc/skeleton.nvim',
     config = function()
-      require('skeleton').setup({
-        template_path = vim.fn.stdpath('config') .. '/templates', -- required
-        tags = {}
-      })
+      require('skeleton').setup({})
     end
   }
 ```
-# Custom tags
+
+# Tags
+## Default tags
+```
+{{ author }} // This will be replaced with the output of 'git config user.name' or 'whoami'
+{{ timestamp }} // The default format of timestamp tag will be '%Y-%m-%d %H:%M:%S' format.
+```
+
+## Custom tags
 You can use the custom tags with `{{ key }}` syntax in your template files, and it will be replaced with the values (or functions) when you call `load()` function.
 ```lua
 {
   template_path = vim.fn.stdpath('config') .. '/templates', -- required
   tags = {
-    author = 'john', -- The default value of author will be output of 'git config user.name' or 'whoami'.
-    timestamp = function() -- The default value of timestamp tag will be '%Y-%m-%d %H:%M:%S' format.
+    key1 = 'value1',
+    key2 = function()
       return os.date("%Y-%m-%d") 
     end
   }
@@ -38,14 +43,14 @@ You can use the custom tags with `{{ key }}` syntax in your template files, and 
 # Configuration for fzf-lua users
 Add below to your `fzf-lua` settings
 ```lua
-local skeleton = require('skeleton')
+local template_path = vim.fn.stdpath('config') .. '/templates'
 util.nmap(
   '<C-M-t>',
   function()
     fzf_lua.files({
       file_icons = true,
       git_icons = false,
-      cwd = skeleton.get_template_path(),
+      cwd = template_path,
       preview = "bat --style=plain {}",
       fzf_opts = { ['--preview-window'] = 'nohidden,down,50%' },
       actions = {
@@ -55,7 +60,7 @@ util.nmap(
           if not fzf_lua.path.starts_with_separator(abs_path) then
             abs_path = fzf_lua.path.join({ opts.cwd or vim.loop.cwd(), abs_path })
           end
-          skeleton.load(abs_path)
+          require('skeleton').load(abs_path)
         end,
       }
     })
