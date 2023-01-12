@@ -25,7 +25,6 @@ Load your templates with custom defined variables or functions!
 You can use the custom tags with `{{ key }}` syntax in your template files, and it will be replaced with the values (or functions) when you call `load()` function.
 ```lua
 {
-  template_path = vim.fn.stdpath('config') .. '/templates', -- required
   tags = {
     key1 = 'value1',
     key2 = function()
