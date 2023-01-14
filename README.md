@@ -15,7 +15,7 @@ Load your templates with custom defined variables or functions!
 ```
 
 # Tags
-## Default tags
+## Built-in tags
 ```
 {{ author }} // This will be replaced with the output of 'git config user.name' or 'whoami'
 {{ timestamp }} // The default format of timestamp tag will be '%Y-%m-%d %H:%M:%S' format.
