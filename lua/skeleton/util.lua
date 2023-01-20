@@ -18,6 +18,10 @@ M.default_datetime = function()
   return os.date("%Y-%m-%d %H:%M:%S")
 end
 
+M.default_file_name = function()
+  return vim.fn.expand('%:r')
+end
+
 M.contains = function(table, key)
   return table[key] ~= nil
 end

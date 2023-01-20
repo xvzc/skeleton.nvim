@@ -23,6 +23,10 @@ M.setup = function(config)
     config.tags.author = util.default_author
   end
 
+  if not util.contains(config.tags, "file_name") then
+    config.tags.file_name = util.default_file_name
+  end
+
   for k, v in pairs(config.tags) do
     if not util.is_function(v) and not util.is_string(v) then
       error('The value of \"tags.' .. k .. '\" is not a function or string.')
