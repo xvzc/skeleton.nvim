@@ -5,43 +5,44 @@ local M = {}
 
 M.config = {}
 
-M.test = function()
-end
-
-M.setup = function(config)
-  if config.tags == nil then
-    config.tags = {}
+M.setup = function(opts)
+  if opts.template_path == nil then
+    opts.template_path = vim.fn.stdpath('config') .. '/templates'
   end
 
-  config.tags.cursor = nil
-
-  if not util.contains(config.tags, "timestamp") then
-    config.tags.timestamp = util.default_datetime
+  if opts.tags == nil then
+    opts.tags = {}
   end
 
-  if not util.contains(config.tags, "author") then
-    config.tags.author = util.default_author
+  if not util.contains(opts.tags, "timestamp") then
+    opts.tags.timestamp = util.default_datetime
   end
 
-  if not util.contains(config.tags, "file_name") then
-    config.tags.file_name = util.default_file_name
+  if not util.contains(opts.tags, "author") then
+    opts.tags.author = util.default_author
   end
 
-  for k, v in pairs(config.tags) do
+  if not util.contains(opts.tags, "file_name") then
+    opts.tags.file_name = util.default_file_name
+  end
+
+  for k, v in pairs(opts.tags) do
     if not util.is_function(v) and not util.is_string(v) then
       error('The value of \"tags.' .. k .. '\" is not a function or string.')
     end
   end
 
-  M.config = config
+  opts.tags.cursor = "cursor"
+
+  M.config = opts
 end
 
-M.load = function(abs_path, config)
-  if config == nil then
-    config = M.config
+M.load = function(abs_path, opts)
+  if opts == nil then
+    opts = M.config
   end
 
-  core.load_template(abs_path, config)
+  core.load_template(abs_path, opts)
 end
 
 return M
