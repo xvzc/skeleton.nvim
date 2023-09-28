@@ -39,16 +39,20 @@ You can use the custom tags with `{{ key }}` syntax in your template files, and 
 }
 ```
 
-# Usage
-```
-:lua require('skeleton').load('/home/john/example.txt')
-```
-
-# Support telescopt
+# Integration with telescope 
 Add the line below to the bottom of your Telescope config.
 ```lua
 telescope.load_extension('skeleton')
 ```
+
+# Usage
+```
+:lua require('skeleton').load('/home/john/example.txt')
+```
+```
+:Telescope skeleton
+```
+
 
 # Inspirations
 - [template.nvim](https://github.com/glepnir/template.nvim)
