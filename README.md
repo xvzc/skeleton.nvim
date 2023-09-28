@@ -2,7 +2,7 @@
 Minimal and fully configurable template loader for neovim users.  
 Load your templates with custom defined variables or functions!
 
-![skeleton](https://user-images.githubusercontent.com/45588457/211829055-4ee23d0e-3e34-42d7-8bf8-363192268751.gif)
+<img src="https://github.com/xvzc/skeleton.nvim/assets/45588457/6e851de3-46cc-4628-80e3-2d3212745331" width="50%" height="50%">
 
 # Minimal configuration
 ```lua
