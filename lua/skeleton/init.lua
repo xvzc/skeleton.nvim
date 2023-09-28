@@ -32,8 +32,6 @@ M.setup = function(opts)
     end
   end
 
-  opts.tags.cursor = "cursor"
-
   M.config = opts
 end
 

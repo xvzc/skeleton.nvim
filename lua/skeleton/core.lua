@@ -57,21 +57,24 @@ M.load_template = function(abs_path, opts)
   local lines = {}
   util.read_file(abs_path,
     vim.schedule_wrap(function(data)
-      local cursor_found = false
-      local cur_cursor_line = vim.api.nvim_win_get_cursor(0)[1]
+      local cursor_tag_found = false
       local cursor_tag_line = 0
+      local cursor_tag_col = 0
+
+      local cur_cursor_line = vim.api.nvim_win_get_cursor(0)[1]
 
       for idx, line in pairs(vim.split(data, '\n')) do
         for k, v in pairs(tag_values) do
           line = line:gsub("{{%s*" .. k .. "%s*}}", v)
         end
 
-        if not cursor_found then
-          local str, count = string.gsub(line, ".*{{%s*" .. opts.tags.cursor .. "%s*}}", "")
+        if not cursor_tag_found then
+          local str, count = string.gsub(line, "{{%s*cursor%s*}}", "")
           if count > 0 then
-            cursor_found = true
             line = str
+            cursor_tag_found = true
             cursor_tag_line = idx
+            cursor_tag_col = string.len(line)
           end
         end
 
@@ -88,8 +91,11 @@ M.load_template = function(abs_path, opts)
       end
 
       vim.api.nvim_buf_set_lines(cur_buf, start, cur_line, true, lines)
-      if cursor_found then
-        vim.api.nvim_win_set_cursor(0, { cur_cursor_line + cursor_tag_line, 0 })
+      if cursor_tag_found then
+        vim.api.nvim_win_set_cursor(0, {
+          cur_cursor_line + cursor_tag_line,
+          cursor_tag_col
+        })
       end
     end)
   )
