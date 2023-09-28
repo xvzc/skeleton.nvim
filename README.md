@@ -1,5 +1,5 @@
 # skeleton.nvim
-Minimal and fully configurable template loader for neovim users.  
+A minimal and fully configurable template loader for neovim users.  
 Load your templates with custom defined variables or functions!
 
 <img src="https://github.com/xvzc/skeleton.nvim/assets/45588457/6e851de3-46cc-4628-80e3-2d3212745331" width="50%" height="50%">
