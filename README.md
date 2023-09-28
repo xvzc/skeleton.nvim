@@ -6,18 +6,23 @@ Load your templates with custom defined variables or functions!
 
 # Minimal configuration
 ```lua
-  use {
+use {
     'xvzc/skeleton.nvim',
     config = function()
-      require('skeleton').setup({})
+        require('skeleton').setup({
+            template_path = vim.fn.stdpath('config') .. '/templates',
+            tags = {
+                author = 'my-nickname'
+            }
+        })
     end
-  }
+}
 ```
 
 # Tags
 ## Built-in tags
 ```
-{{ author }} // This will be replaced with the output of 'git config user.name' or 'whoami'
+{{ author }} // This will be replaced with the output of 'git config user.name' or 'whoami', also you can replcae this tag with any other function or string values
 {{ timestamp }} // The default format of timestamp tag will be '%Y-%m-%d %H:%M:%S' format.
 ```
 
@@ -39,35 +44,11 @@ You can use the custom tags with `{{ key }}` syntax in your template files, and 
 :lua require('skeleton').load('/home/john/example.txt')
 ```
 
-# Configuration for fzf-lua users
-Add below to your `fzf-lua` settings
+# Support telescopt
+Add the line below to the bottom of your Telescope config.
 ```lua
-local template_path = vim.fn.stdpath('config') .. '/templates'
-util.nmap(
-  '<C-M-t>',
-  function()
-    fzf_lua.files({
-      file_icons = true,
-      git_icons = false,
-      cwd = template_path,
-      preview = "bat --style=plain {}",
-      fzf_opts = { ['--preview-window'] = 'nohidden,down,50%' },
-      actions = {
-        ['default'] = function(selected, opts)
-          local entry = fzf_lua.path.entry_to_file(selected[1])
-          local abs_path = entry.path
-          if not fzf_lua.path.starts_with_separator(abs_path) then
-            abs_path = fzf_lua.path.join({ opts.cwd or vim.loop.cwd(), abs_path })
-          end
-          require('skeleton').load(abs_path)
-        end,
-      }
-    })
-  end,
-  buf_opt
-)
+telescope.load_extension('skeleton')
 ```
 
 # Inspirations
 - [template.nvim](https://github.com/glepnir/template.nvim)
-- [fzf-lua](https://github.com/ibhagwan/fzf-lua)
