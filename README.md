@@ -21,6 +21,7 @@ use {
 
 # Tags
 ## Built-in tags
+There's a couple of built-int tags, you can also override those tags.
 ```
 {{ author }} // This will be replaced with the output of 'git config user.name' or 'whoami', also you can replcae this tag with any other function or string values
 {{ timestamp }} // The default format of timestamp tag will be '%Y-%m-%d %H:%M:%S' format.
