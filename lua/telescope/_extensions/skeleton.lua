@@ -19,7 +19,7 @@ local get_template_files = function(opts)
   return flatten_filenames
 end
 
-local run_skeleton = function(opts)
+local load_template = function(opts)
   opts = opts or {}
   local template_filenames = get_template_files()
 
@@ -47,4 +47,4 @@ local run_skeleton = function(opts)
   pickers.new(opts, tbl):find()
 end
 
-return telescope.register_extension({ exports = { skeleton = run_skeleton } })
+return telescope.register_extension({ exports = { load_template = load_template } })
