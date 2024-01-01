@@ -1,12 +1,16 @@
-# skeleton.nvim
-A minimal and fully configurable template loader for neovim users.  
-Load your templates with custom defined variables or functions!
-
-<img src="https://github.com/xvzc/skeleton.nvim/assets/45588457/6e851de3-46cc-4628-80e3-2d3212745331" width="50%" height="50%">
+<div align="center">
+  <h1 align="center">skeleton.nvim</h2>
+</div>
+<br>
+<div align="center">
+  <p>Load your templates with custom defined variables or functions.</p>
+  <img src="https://github.com/xvzc/skeleton.nvim/assets/45588457/208ee87c-5709-4099-bfb6-dba4766fff88" alt="demo">
+</div>
 
 # Minimal configuration
 ```lua
 use {
+
     'xvzc/skeleton.nvim',
     config = function()
         require('skeleton').setup({
