@@ -11,6 +11,7 @@ use {
     config = function()
         require('skeleton').setup({
             template_path = vim.fn.stdpath('config') .. '/templates',
+            patterns = {}
             tags = {
                 author = 'my-nickname'
             }
@@ -36,6 +37,17 @@ You can use the custom tags with `{{ key }}` syntax in your template files, and 
     key2 = function()
       return os.date("%Y-%m-%d") 
     end
+  }
+}
+```
+
+## Patterns
+When using telescope, skeleton.nvim will basically give you the list of files that has same filetype as the current buffer, 
+but we can also set list of patterns for each filetypes, so that template files that have different filetypes can be listed.
+```lua
+{
+  patterns = {
+        javascript = { "*.cjs" }
   }
 }
 ```

@@ -1,46 +1,65 @@
-local core = require('skeleton.core')
-local util = require('skeleton.util')
+local core = require("skeleton.core")
+local config = require("skeleton.config")
 
-local M = {}
+---@class Skeleton
+---@field config table
+local skeleton = {}
 
-M.config = {}
+local default_config = {
+	template_path = vim.fn.stdpath("config") .. "/skeleton",
+	tags = {
+		timestamp = config.default_datetime,
+		author = config.default_author,
+		file_name = config.default_file_name,
+	},
+	patterns = {},
+}
 
-M.setup = function(opts)
-  if opts.template_path == nil then
-    opts.template_path = vim.fn.stdpath('config') .. '/templates'
-  end
+---@private
+local function __recursive_apply(key, opts, default)
+	if type(opts) == "table" then
+		for k, _ in pairs(opts) do
+			if default[k] == nil then
+				opts[k] = nil
+			end
+		end
+	end
 
-  if opts.tags == nil then
-    opts.tags = {}
-  end
+	if type(default[key]) ~= "table" then
+		opts[key] = opts[key] or default[key]
+		return
+	else
+		opts[key] = opts[key] or {}
+	end
 
-  if not util.contains(opts.tags, "timestamp") then
-    opts.tags.timestamp = util.default_datetime
-  end
-
-  if not util.contains(opts.tags, "author") then
-    opts.tags.author = util.default_author
-  end
-
-  if not util.contains(opts.tags, "file_name") then
-    opts.tags.file_name = util.default_file_name
-  end
-
-  for k, v in pairs(opts.tags) do
-    if not util.is_function(v) and not util.is_string(v) then
-      error('The value of \"tags.' .. k .. '\" is not a function or string.')
-    end
-  end
-
-  M.config = opts
+	for k, _ in pairs(default[key]) do
+		__recursive_apply(k, opts[key], default[key])
+	end
 end
 
-M.load = function(abs_path, opts)
-  if opts == nil then
-    opts = M.config
-  end
+local function load_config(opts, default)
+	opts = opts or {}
+	for k, _ in pairs(default) do
+		__recursive_apply(k, opts, default)
+	end
 
-  core.load_template(abs_path, opts)
+	return opts
 end
 
-return M
+skeleton.setup = function(opts)
+	skeleton.config = load_config(opts, default_config)
+	vim.g.skeleton_setup = 1
+end
+
+---@param path string
+---@param opts table
+---@return nil
+skeleton.load = function(path, opts)
+	if opts == nil then
+		opts = skeleton.config
+	end
+
+	core.load_template(path, opts)
+end
+
+return skeleton
