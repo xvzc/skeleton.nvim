@@ -63,7 +63,7 @@ telescope.load_extension('skeleton')
 :lua require('skeleton').load('/home/john/example.txt')
 ```
 ```
-:Telescope skeleton
+:Telescope skeleton load_template<CR>
 ```
 
 
