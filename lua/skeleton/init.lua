@@ -37,17 +37,8 @@ local function __recursive_apply(key, opts, default)
 	end
 end
 
-local function load_config(opts, default)
-	opts = opts or {}
-	for k, _ in pairs(default) do
-		__recursive_apply(k, opts, default)
-	end
-
-	return opts
-end
-
 skeleton.setup = function(opts)
-	skeleton.config = load_config(opts, default_config)
+	skeleton.config =  vim.tbl_deep_extend('force', default_config, opts or {})
 	vim.g.skeleton_setup = 1
 end
 
